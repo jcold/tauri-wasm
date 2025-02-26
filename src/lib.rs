@@ -154,7 +154,11 @@ impl From<serde_wasm_bindgen::Error> for Error {
 
 impl From<JsValue> for Error {
     fn from(e: JsValue) -> Self {
-        Self::Command(format!("{:?}", e))
+        if let Some(s) = e.as_string() {
+            Self::Command(s)
+        } else {
+            Self::Command(format!("{:?}", e))
+        }
     }
 }
 
