@@ -134,9 +134,9 @@ pub type Result<T> = core::result::Result<T, Error>;
 
 #[derive(Clone, Eq, PartialEq, Debug, thiserror::Error)]
 pub enum Error {
-    #[error("Command returned Error: {0}")]
+    #[error("Command failed: {0}")]
     Command(String),
-    #[error("Failed to parse JSON: {0}")]
+    #[error("JSON parse error: {0}")]
     Serde(String),
     #[cfg(any(feature = "event", feature = "window"))]
     #[error("Oneshot cancelled: {0}")]
